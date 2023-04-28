@@ -1,21 +1,26 @@
-from fastapi import FastAPI 
+from fastapi import FastAPI
 from pydantic import BaseModel
 from enum import Enum
 
 app = FastAPI()
 
-class UserAuthType(Enum):
-    radius = "RADIUS"
+# -- auth
+class AuthType(Enum):
+   qystaq = "QYSTAQ"
 
-class AuthUser(BaseModel):
-    auth_type: UserAuthType
+class User(BaseModel):
+    auth_type: AuthType
     email: str
-    pk: int
-    is_offer: bool = None
 
-@app.get("/")
+# -- clould script
+class ScriptReference(BaseModel):
+    script_path: str
+
+
+@app.post("/updload_script")
 async def echo(q: str = None):
-    return [ q, ]
+    return AuthUser()
+
 
 if __name__ == "__main__":
     print("Running...")
